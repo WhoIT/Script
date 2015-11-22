@@ -19,10 +19,10 @@ VPN_NAME="Stockholm"
 VPN_UID="913ba402-1ed8-407a-915b-9d4c0b368378"
 
 # Delay in secconds
-DELAY=5
+DELAY=15
 
 # Enable/disable ping connection check
-PING_CHECK_ENABLED=false
+PING_CHECK_ENABLED=true
 
 # Check IP/Hostname
 CHECK_HOST="8.8.8.8"
@@ -54,18 +54,10 @@ elif [[ $1 == "start" ]]; then
     else
       echo -e "\033[32m$(date +%Y/%m/%d\ %H:%M:%S) -> Already connected to $VPN_NAME!"
     fi
-curl -s http://whatismycountry.com/ |   sed -n 's|.*,\(.*\)</h3>|\1|p'
     sleep $DELAY
 
     if [[ $PING_CHECK_ENABLED = true ]]; then
-      PINGCON=$(ping $CHECK_HOST -c2 -q -W 3 |grep "2 received")
-      if [[ $PINGCON != *2*received* ]]; then
-        echo -e "\033[31m$(date +%Y/%m/%d\ %H:%M:%S) -> Ping check timeout ($CHECK_HOST), trying to reconnect..."
-        (nmcli con down uuid $VPN_UID)
-        (sleep 1s && nmcli con up uuid $VPN_UID)
-      else
-        echo -e "\033[32m$(date +%Y/%m/%d\ %H:%M:%S) -> Ping check ($CHECK_HOST) - OK!"
-      fi
+curl -s http://whatismycountry.com/ | sed -n 's|.*,\(.*\)</h3>|\1|p'
     fi
   done
 
