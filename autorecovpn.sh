@@ -16,13 +16,13 @@
 
 # You can see those with "nmcli con" command
 VPN_NAME="Stockholm"
-VPN_UID="913ba402-1ed8-407a-915b-9d4c0b368378"
+VPN_UID="63b138f9-84a3-4e54-ac02-21e6f530b244"
 
 # Delay in secconds
-DELAY=15
+DELAY=5
 
 # Enable/disable ping connection check
-PING_CHECK_ENABLED=true
+PING_CHECK_ENABLED=false
 
 # Check IP/Hostname
 CHECK_HOST="8.8.8.8"
